@@ -79,6 +79,12 @@ yum -y install \
     yasm \
     ${PYTHON_COMPILE_DEPS}
 
+# Build and install gcc-4.9.4
+yum -y install flex texinfo-tex
+build_gcc $GCC_ROOT $GCC_HASH
+/usr/local/$GCC_ROOT/bin/gcc --version
+/usr/local/$GCC_ROOT/bin/g++ --version
+
 # Build an OpenSSL for both curl and the Pythons. We'll delete this at the end.
 build_openssl $OPENSSL_ROOT $OPENSSL_HASH
 

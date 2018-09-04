@@ -39,3 +39,7 @@ GIT_DOWNLOAD_URL=https://github.com/git/git/archive
 GET_PIP_URL=https://bootstrap.pypa.io/get-pip.py
 EPEL_RPM_HASH=0dcc89f9bf67a2a515bad64569b7a9615edc5e018f676a578d5fd0f17d3c81d4
 DEVTOOLS_HASH=a8ebeb4bed624700f727179e6ef771dafe47651131a00a78b342251415646acc
+
+GCC_ROOT=gcc-4.9.4
+GCC_HASH=1680f92781b92cbdb57d7e4f647c650678c594154cb0d707fd9a994424a9860d
+GCC_DOWNLOAD_URL=http://www.netgull.com/gcc/releases

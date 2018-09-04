@@ -246,3 +246,29 @@ function build_libtool {
     (cd ${libtool_fname} && do_standard_install)
     rm -rf ${libtool_fname} ${libtool_fname}.tar.gz
 }
+
+function do_gcc_build {
+    local fcc_fname=$1
+
+    sed -i 's/^\( *\)wget /\1curl -LO -u anonymous: /' ./contrib/download_prerequisites
+    ./contrib/download_prerequisites
+
+    mkdir -p build
+    cd build
+    ../configure --prefix=/usr/local/${gcc_fname} CFLAGS=-fPIC CXXFLAGS=-fPIC --enable-languages=c,c++ --disable-bootstrap --disable-multilib > /dev/null
+    make > /dev/null
+    make install > /dev/null
+}
+
+function build_gcc {
+    local gcc_fname=$1
+    check_var ${gcc_fname}
+    local gcc_sha256=$2
+    check_var ${gcc_sha256}
+    check_var ${GCC_DOWNLOAD_URL}
+    fetch_source ${gcc_fname}.tar.gz ${GCC_DOWNLOAD_URL}/${gcc_fname}
+    check_sha256sum ${gcc_fname}.tar.gz ${gcc_sha256}
+    tar -zxf ${gcc_fname}.tar.gz
+    (cd ${gcc_fname} && do_gcc_build ${gcc_fname})
+    rm -rf ${gcc_fname} ${gcc_fname}.tar.gz
+}

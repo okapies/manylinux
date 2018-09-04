@@ -1,3 +1,31 @@
+Note
+=========
+
+This is a customized `manylinux <https://github.com/pypa/manylinux>`_ for building C++14 source codes.
+
+It additionally installs newer GCC under `/usr/local/gcc-x.y.z`.
+
+Usage
+-----
+
+```bash
+export GCC_ROOT=/usr/local/gcc-4.9.4
+export PATH=$GCC_ROOT/bin:$PATH
+export LD_LIBRARY_PATH=$GCC_ROOT/lib:$GCC_ROOT/lib64:$LD_LIBRARY_PATH
+``` 
+
+Autoconf:
+
+```bash
+CPP=/usr/local/gcc-x.y.z/cpp CC=/usr/local/gcc-x.y.z/bin/gcc CXX=/usr/local/gcc-x.y.z/bin/g++ ./configure
+```
+
+cmake:
+
+```bash
+cmake -DCMAKE_C_COMPILER=/usr/local/gcc-x.y.z/bin/gcc -DCMAKE_CXX_COMPILER=/usr/local/gcc-x.y.z/bin/g++ .
+```
+
 manylinux
 =========
 
