@@ -250,13 +250,14 @@ function build_libtool {
 function do_gcc_build {
     local fcc_fname=$1
 
+    # use `curl` instead of `wget`
     sed -i 's/^\( *\)wget /\1curl -LO -u anonymous: /' ./contrib/download_prerequisites
     ./contrib/download_prerequisites
 
     mkdir -p build
     cd build
     ../configure --prefix=/usr/local/${gcc_fname} CFLAGS=-fPIC CXXFLAGS=-fPIC --enable-languages=c,c++ --disable-bootstrap --disable-multilib > /dev/null
-    make > /dev/null
+    make -j$(grep -c processor /proc/cpuinfo) > /dev/null
     make install > /dev/null
 }
 
